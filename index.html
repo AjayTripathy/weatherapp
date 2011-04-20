@@ -1,40 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="master.css"/>
     <title>WeatherApp</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(window).ready(function() {
-          initiate_geolocation();
-          });
-
-      function initiate_geolocation() {
-      navigator.geolocation.getCurrentPosition(handle_geolocation_query);
-      }
-
-      function handle_geolocation_query(position) {
-        alert('Lat: ' + position.coords.latitude + ' ' + 'Lon: ' + position.coords.longitude);
-
-        var image_url = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + position.coords.latitude + "," + position.coords.longitude+"&zoom=14&size=300x400&markers=color:blue|label:S|"+position.coords.latitude+","+position.coords.longitude;
-        $("#map").remove();
-        $(document.body).append(
-            $(document.createElement("img")).attr("src", image_url).attr("id","map")
-            );
-        sendLocation(position.coords.latitude+','+position.coords.longitude);
-      }
-      
-      function sendLocation(place) {
-        alert(place);
-      $.getJSON("http://ajt.no.de:9001?loc="+place+"&callback=?", function(result) {
-          alert(result.data);
-        });
-      }
-
-
-      </script>
+    <script type="text/javascript" src="weatherlogic.js"></script>
   </head>
 
   <body>
+    <div id="infowrapper"> 
+      <br>You are here:
+      <br><div id="location">Loading...</div>
+      <br>The temperature is:
+      <br><div id="temperature">Loading...</div>
+      <br>Special Weather: <div id="special">tornado</div>
+      <br>You should wear:
+      <br><div id="clothing">Nothing</div>
+      <br>
+    </div>
+    <br>
+    <br><div id="map"></div>
   </body>
 
 </html>
