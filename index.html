@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WeatherApp</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(window).ready(function() {
+          initiate_geolocation();
+          });
+
+      function initiate_geolocation() {
+      navigator.geolocation.getCurrentPosition(handle_geolocation_query);
+      }
+
+      function handle_geolocation_query(position) {
+        alert('Lat: ' + position.coords.latitude + ' ' + 'Lon: ' + position.coords.longitude);
+
+        var image_url = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + position.coords.latitude + "," + position.coords.longitude+"&zoom=14&size=300x400&markers=color:blue|label:S|"+position.coords.latitude+","+position.coords.longitude;
+        $("#map").remove();
+        $(document.body).append(
+            $(document.createElement("img")).attr("src", image_url).attr("id","map")
+            );
+        sendLocation(position.coords.latitude+','+position.coords.longitude);
+      }
+      
+      function sendLocation(place) {
+        alert(place);
+      $.getJSON("http://ajt.no.de:9001?loc="+place+"&callback=?", function(result) {
+          alert(result.data);
+        });
+      }
+
+
+      </script>
+  </head>
+
+  <body>
+  </body>
+
+</html>
