@@ -1,6 +1,5 @@
 var http = require('http');
 var url = require('url');
-var math = require('math');
 
 
 function handleHttp(req, res, jsonp){
