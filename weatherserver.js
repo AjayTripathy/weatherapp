@@ -25,8 +25,12 @@ function handleHttp(req, res, jsonp){
 				console.log('HEADERS: ' + JSON.stringify(response.headers));
 				response.setEncoding('utf8');
 				response.on('data', function (chunk) {
-					console.log(JSON.parse(chunk).data.weather[0]);
-					end('success', chunk, res, jsonp);
+					console.log(JSON.parse(chunk).data.current_condition[0].humidity);
+					var humidity = JSON.parse(chunk).data.current_condition[0].humidity;
+					var temp = JSON.parse(chunk).data.current_condition[0].temp_F;
+					var  windspeed = JSON.parse(chunk).data.current_condition[0].windspeedMiles;
+					var effectTemp = effectiveTemp(temp, windspeed, humidity);
+					end('success', effectTemp, res, jsonp);
 				});
 			});
 
