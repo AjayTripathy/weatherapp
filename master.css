@@ -1,0 +1,17 @@
+body {
+  text-align: center;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#infowrapper {
+  background-color: gray;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+}
+
+input {
+}
+
+
